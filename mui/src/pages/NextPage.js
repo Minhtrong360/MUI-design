@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import React from "react";
 import jobs from "../jobs.json";
 import JobCard from "../component/JobCard";
+import ClickableLinkChips from "../component/ClickableLinkChips";
 
 function NextPage() {
   return (
@@ -13,6 +14,7 @@ function NextPage() {
           </Grid>
         ))}
       </Grid>
+      <ClickableLinkChips />
     </div>
   );
 }

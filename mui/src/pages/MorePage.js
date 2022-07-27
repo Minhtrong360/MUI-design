@@ -1,12 +1,38 @@
 import { Container, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ColorChips from "../component/ColorChips";
+import apiService from "../app/apiService";
 import jobs from "../jobs.json";
 function MorePage() {
+  // const [job, setJob] = useState(null);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState("");
   const params = useParams();
+
   const jobId = params.id;
   const job = jobs.find((job) => job.id === jobId);
+
+  // useEffect(() => {
+  //   if (params.id) {
+  //     const getJob = async () => {
+  //       // setLoading(true);
+  //       try {
+  //         const res = await apiService.get(`/${params.id}`);
+  //         console.log("first", res);
+  //         setJob(res.data);
+
+  //         // setError("");
+  //       } catch (error) {
+  //         console.log(error);
+  //         // setError(error.message);
+  //       }
+  //       // setLoading(false);
+  //     };
+  //     getJob();
+  //   }
+  // }, [params]);
+
   if (!job)
     return (
       <Container>
@@ -23,7 +49,12 @@ function MorePage() {
         justifyContent: "center",
       }}
     >
-      <Typography variant="h2" mt={3} justifyContent="center">
+      <Typography
+        variant="h2"
+        mt={3}
+        justifyContent="center"
+        textAlign="center"
+      >
         {job.title}
       </Typography>
       <Grid container spacing={2} mt={0.5} justifyContent="center">

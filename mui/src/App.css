@@ -1,0 +1,6 @@
+.text.ellipsis::after {
+  content: "...";
+  /* position: absolute; */
+  right: -12px;
+  bottom: 4px;
+}

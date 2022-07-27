@@ -8,6 +8,7 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -51,6 +52,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 export default function ButtonAppBar(job) {
+  const { user } = useAuth();
+  let auth = useAuth();
   const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -64,7 +67,7 @@ export default function ButtonAppBar(job) {
           >
             <u>Job Rounting</u>
           </Typography>
-          <Search>
+          <Search sx={{ marginRight: "10px" }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -73,7 +76,21 @@ export default function ButtonAppBar(job) {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <Button color="inherit">Login</Button>
+          {user?.username ? (
+            <Typography variant="h6" color="inherit" component="div">
+              Welcome {user?.username}
+              <span>
+                {" "}
+                <Button color="inherit" onClick={() => auth.logout()}>
+                  Logout
+                </Button>{" "}
+              </span>
+            </Typography>
+          ) : (
+            <Button color="inherit" onClick={() => navigate(`/login`)}>
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
